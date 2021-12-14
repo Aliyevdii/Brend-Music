@@ -193,15 +193,15 @@ def r_ply(type_):
     mar = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("⏹", "Sesten Çık"),
+                InlineKeyboardButton("⏹", "Səsten Çıx"),
                 InlineKeyboardButton("⏸", "Durdur"),
-                InlineKeyboardButton("▶️", "Devam"),
-                InlineKeyboardButton("⏭", "Geç"),
+                InlineKeyboardButton("▶️", "Başlat"),
+                InlineKeyboardButton("⏭", "Keç"),
             ],
             [
-                InlineKeyboardButton("Müzik Listesi 📖", "playlist"),
+                InlineKeyboardButton("Musiqi Listəsi 📖", "playlist"),
             ],
-            [InlineKeyboardButton("❌ Kapat", "cls")],
+            [InlineKeyboardButton("❌ Bağla", "cls")],
         ]
     )
     return mar
@@ -407,15 +407,15 @@ async def m_cb(b, cb):
         marr = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("⏹", "Ayrıl"),
+                    InlineKeyboardButton("⏹", "Cıx"),
                     InlineKeyboardButton("⏸", "Durdur"),
-                    InlineKeyboardButton("▶️", "Devam ettir"),
-                    InlineKeyboardButton("⏭", "Geç"),
+                    InlineKeyboardButton("▶️", "Dəvam ettir"),
+                    InlineKeyboardButton("⏭", "Keç"),
                 ],
                 [
-                    InlineKeyboardButton("Müziklist 📖", "playlist"),
+                    InlineKeyboardButton("MUsiqilist 📖", "playlist"),
                 ],
-                [InlineKeyboardButton("❌ Kapat", "cls")],
+                [InlineKeyboardButton("❌ Bağla", "cls")],
             ]
         )
         await cb.message.edit(stats, reply_markup=marr)
@@ -428,7 +428,7 @@ async def m_cb(b, cb):
             queues.task_done(chet_id)
             if queues.is_empty(chet_id):
                 callsmusic.stop(chet_id)
-                await cb.message.edit("- Artık Çalma Listesi Yok..\n-Vc'den ayrılma!")
+                await cb.message.edit("- Daha Pleylist yoxdur..\n-Vc'den ayrılma!")
             else:
                 await callsmusic.set_stream(
                     chet_id, queues.get(chet_id)["file"]
@@ -436,7 +436,7 @@ async def m_cb(b, cb):
                 await cb.answer.reply_text("✅ <b>Skipped</b>")
                 await cb.message.edit((m_chat, qeue), reply_markup=r_ply(the_data))
                 await cb.message.reply_text(
-                    f"- Geçildi track\n- Müzik başlıyor **{qeue[0][0]}**"
+                    f"- keçdi track\n- Musiqi başlayır **{qeue[0][0]}**"
                 )
 
     else:
@@ -458,7 +458,7 @@ async def oynat(_, message: Message):
     global useer
     if message.chat.id in DISABLED_GROUPS:
         return    
-    lel = await message.reply("🔄 <b>Yükleniyor</b>")
+    lel = await message.reply("🔄 <b>Yüklənir</b>")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
 
@@ -513,7 +513,7 @@ async def oynat(_, message: Message):
         )
         return
     text_links=None
-    await lel.edit("🔎 <b>Hazırlanıyor..</b>")
+    await lel.edit("🔎 <b>Hazırlanır..</b>")
     if message.reply_to_message:
         if message.reply_to_message.audio:
             pass
@@ -549,10 +549,10 @@ async def oynat(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 Müziklist", callback_data="playlist"),
+                    InlineKeyboardButton("📖 Musiqilist", callback_data="playlist"),
                     InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
                 ],
-                [InlineKeyboardButton(text="❌ Kapat", callback_data="cls")],
+                [InlineKeyboardButton(text="❌ Bağla", callback_data="cls")],
             ]
         )
         file_name = get_file_name(audio)
@@ -570,7 +570,7 @@ async def oynat(_, message: Message):
         )
     elif urls:
         query = toxt
-        await lel.edit("🎵 <b>Yükleniyor</b>")
+        await lel.edit("🎵 <b>Yüklenir</b>")
         ydl_opts = {"format": "bestaudio/best"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
@@ -611,9 +611,9 @@ async def oynat(_, message: Message):
                 ],
                 [
                     InlineKeyboardButton(text="🎬 YouTube", url=f"{url}"),
-                    InlineKeyboardButton(text="İndir 📥", url=f"{dlurl}"),
+                    InlineKeyboardButton(text="Endir 📥", url=f"{dlurl}"),
                 ],
-                [InlineKeyboardButton(text="❌ Kapat", callback_data="cls")],
+                [InlineKeyboardButton(text="❌ Bağla", callback_data="cls")],
             ]
         )
         requested_by = message.from_user.first_name
@@ -624,7 +624,7 @@ async def oynat(_, message: Message):
         for i in message.command[1:]:
             query += " " + str(i)
         print(query)
-        await lel.edit("🎵 **yükleniyor**")
+        await lel.edit("🎵 **yüklenir**")
         ydl_opts = {"format": "bestaudio/best"}
         
         try:
@@ -690,7 +690,7 @@ async def oynat(_, message: Message):
                     dur += (int(dur_arr[i]) * secmul)
                     secmul *= 60
                 if (dur / 60) > DURATION_LIMIT:
-                     await lel.edit(f"❌ Videolar daha uzun {DURATION_LIMIT} dakika oynamak için izin verilmez!")
+                     await lel.edit(f"❌ Videolar daha uzundur {DURATION_LIMIT} dəqiqə oynamağa icazə verilmir!")
                      return
             except:
                 pass
@@ -704,9 +704,9 @@ async def oynat(_, message: Message):
                     ],
                     [
                         InlineKeyboardButton(text="🎬 YouTube", url=f"{url}"),
-                        InlineKeyboardButton(text="İndir 📥", url=f"{dlurl}"),
+                        InlineKeyboardButton(text="Endir 📥", url=f"{dlurl}"),
                     ],
-                    [InlineKeyboardButton(text="❌ Kapat", callback_data="cls")],
+                    [InlineKeyboardButton(text="❌ Bağla", callback_data="cls")],
                 ]
             )
             requested_by = message.from_user.first_name
@@ -758,7 +758,7 @@ async def ytplay(_, message: Message):
     global que
     if message.chat.id in DISABLED_GROUPS:
         return
-    lel = await message.reply("🔄 <b>Yükleniyor</b>")
+    lel = await message.reply("🔄 <b>Yüklenir</b>")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
 
@@ -821,7 +821,7 @@ async def ytplay(_, message: Message):
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    await lel.edit("🎵 <b>Yükleniyor</b>")
+    await lel.edit("🎵 <b>Yüklenir</b>")
     ydl_opts = {"format": "bestaudio/best"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -862,9 +862,9 @@ async def ytplay(_, message: Message):
             ],
             [
                 InlineKeyboardButton(text="🎬 YouTube", url=f"{url}"),
-                InlineKeyboardButton(text="İndir 📥", url=f"{dlurl}"),
+                InlineKeyboardButton(text="Endir 📥", url=f"{dlurl}"),
             ],
-            [InlineKeyboardButton(text="❌ Kapat", callback_data="cls")],
+            [InlineKeyboardButton(text="❌ Bağla", callback_data="cls")],
         ]
     )
     requested_by = message.from_user.first_name
@@ -898,7 +898,7 @@ async def ytplay(_, message: Message):
         try:
            await callsmusic.set_stream(chat_id, file_path)
         except:
-            message.reply("Grup çağrısı bağlı değil veya katılamam")
+            message.reply("Qrup zəngi qoşulmayıb və ya mən qoşula bilmirəm")
             return
         await message.reply_photo(
             photo="final.png",
@@ -915,7 +915,7 @@ async def deezer(client: Client, message_: Message):
     if message_.chat.id in DISABLED_GROUPS:
         return
     global que
-    lel = await message_.reply("🔄 <b>Yükleniyor</b>")
+    lel = await message_.reply("🔄 <b>Yüklenir</b>")
     administrators = await get_administrators(message_.chat)
     chid = message_.chat.id
     try:
@@ -932,14 +932,14 @@ async def deezer(client: Client, message_: Message):
             if administrator == message_.from_user.id:
                 if message_.chat.title.startswith("Channel Music: "):
                     await lel.edit(
-                        "<b>Kanalınıza bir yardımcı eklemeyi unutmayın</b>",
+                        "<b>Kanalınıza köməkçi əlavə etməyi unutmayın</b>",
                     )
                     pass
                 try:
                     invitelink = await client.export_chat_invite_link(chid)
                 except:
                     await lel.edit(
-                        "<b>Önce beni  grubunun yöneticisi olarak Ekle</b>",
+                        "<b>Əvvəlcə məni qrupa admin kimi əlavə et</b>",
                     )
                     return
 
@@ -1004,7 +1004,7 @@ async def deezer(client: Client, message_: Message):
                 InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
             ],
             [InlineKeyboardButton(text="Listen On Deezer 🎬", url=f"{url}")],
-            [InlineKeyboardButton(text="❌ Kapat", callback_data="cls")],
+            [InlineKeyboardButton(text="❌ Bağla", callback_data="cls")],
         ]
     )
     file_path = await convert(wget.download(url))
@@ -1053,7 +1053,7 @@ async def jiosaavn(client: Client, message_: Message):
     global que
     if message_.chat.id in DISABLED_GROUPS:
         return    
-    lel = await message_.reply("🔄 <b>Yükleniyor</b>")
+    lel = await message_.reply("🔄 <b>Yüklenir</b>")
     administrators = await get_administrators(message_.chat)
     chid = message_.chat.id
     try:
@@ -1294,7 +1294,7 @@ async def lol_cb(b, cb):
         await b.send_photo(chat_id,
             photo="final.png",
             reply_markup=keyboard,
-            caption=f"▶️ <b>Oynatılıyor..</b> işte şarkı tarafından talep {r_by.mention} YouTube müzik aracılığıyla 😎",
+            caption=f"▶️ <b>Oynatılıyor..</b> mahnının xahişi budur {r_by.mention} YouTube musiqi vasitəsilə 🤓",
         )
         
         os.remove("final.png")
